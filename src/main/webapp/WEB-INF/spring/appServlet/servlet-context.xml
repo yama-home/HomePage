@@ -23,6 +23,27 @@
 	
 	<context:component-scan base-package="net.hyunny333.controller" />
 	
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg
+			value="F:\\Spring\\Workspace\\HomePage\\uploads">
+		</beans:constructor-arg>
+	</beans:bean>
 	
+	<beans:bean id="authInterceptor" class="net.hyunny333.interceptor.AuthInterceptor"></beans:bean>
+	<beans:bean id="loginInterceptor" class="net.hyunny333.interceptor.LoginInterceptor"></beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/board/add"/>
+			<mapping path="/board/edit"/>
+			<mapping path="/board/del"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/member/loginPost"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>

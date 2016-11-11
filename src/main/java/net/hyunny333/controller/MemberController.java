@@ -35,4 +35,12 @@ public class MemberController {
 
 		model.addAttribute("memberVO", vo);
 	}
+
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpSession session, Model model) throws Exception {
+		logger.info(((MemberVO) session.getAttribute("login")).getUserid() +" 님이 logout 해씀다.");
+		session.removeAttribute("login");
+
+		return "redirect:/";
+	}
 }

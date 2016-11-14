@@ -16,3 +16,30 @@ CREATE TABLE `member` (
 );
 INSERT INTO `member` SET `userid`='hyunny333', `userpw`=PASSWORD('tkdgus2'), `username`='엄상현', `email`='hyunny333@gmail.com';
 SELECT * FROM `member`;
+
+
+
+
+DROP TABLE `portfolio`;
+CREATE TABLE `portfolio` (
+	`idx` INT NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '제목',
+    `content` TEXT,
+    `regdate` TIMESTAMP NOT NULL DEFAULT NOW() COMMENT '등록일',
+    PRIMARY KEY(`idx`)
+);
+SELECT * FROM `portfolio`;
+
+
+
+
+DROP TABLE `portfolio_files`;
+CREATE TABLE `portfolio_files` (
+	`idx` INT NOT NULL AUTO_INCREMENT,
+    `portfolio_idx` INT NOT NULL DEFAULT 0 COMMENT '원글 idx',
+    `file_name` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '파일명',
+    `file_size` INT NOT NULL DEFAULT 0 COMMENT '파일용량',
+    PRIMARY KEY(`idx`)
+);
+ALTER TABLE `portfolio_files` ADD CONSTRAINT `fk_portfolio` FOREIGN KEY (`portfolio_idx`) REFERENCES `portfolio` (`idx`);
+SELECT * FROM `portfolio_files`;

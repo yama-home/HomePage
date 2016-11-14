@@ -22,4 +22,9 @@ public class PortfolioController {
 	public void list(Model model) throws Exception {
 		logger.info("portfolio list colled..........");
 	}
+
+	@RequestMapping(value="/add", method=RequestMethod.GET)
+	public void addGET() throws Exception {
+		logger.info("portfolio add form colled..........");
+	}
 }

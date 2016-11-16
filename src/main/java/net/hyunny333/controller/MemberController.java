@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.hyunny333.domain.MemberVO;
 import net.hyunny333.dto.LoginDTO;
@@ -42,5 +43,15 @@ public class MemberController {
 		session.removeAttribute("login");
 
 		return "redirect:/";
+	}
+
+	@RequestMapping(value="/join", method=RequestMethod.GET)
+	public void joinGET(Model model) throws Exception {
+		
+	}
+
+	@RequestMapping(value="/joinPost", method=RequestMethod.POST)
+	public void joinPOST(MemberVO vo, RedirectAttributes rttr) throws Exception {
+		
 	}
 }

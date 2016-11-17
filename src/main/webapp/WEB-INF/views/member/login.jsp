@@ -39,36 +39,36 @@ $(document).ready(function () {
 <body class="login-page">
 <div class="login-box">
 	<div class="login-logo">
-		<a href="/"><b>HomePage</b>Login</a>
+		<a href="/"><b>홈페이지</b>로그인</a>
 	</div>
 	<div class="login-box-body">
-		<p class="login-box-msg">Sign in to start your session</p>
+		<p class="login-box-msg">로그인 정보를 입력해주세요.</p>
 
 		<form action="/member/loginPost" method="post">
 		<div class="form-group has-feedback">
-			<input type="text" name="userid" class="form-control" placeholder="USER ID"/>
+			<input type="text" name="userid" class="form-control" placeholder="아이디"/>
 			<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 		</div>
 		<div class="form-group has-feedback">
-			<input type="password" name="userpw" class="form-control" placeholder="Password"/>
+			<input type="password" name="userpw" class="form-control" placeholder="비밀번호"/>
 			<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 		</div>
 		<div class="row">
 			<div class="col-xs-8">
 				<div class="checkbox icheck">
 					<label>
-						<input type="checkbox" name="useCookie"/> Remember Me
+						<input type="checkbox" name="useCookie"/> 로그인 상태 유지
 					</label>
 				</div>
 			</div>
 			<div class="col-xs-4">
-				<button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+				<button type="submit" class="btn btn-primary btn-block btn-flat">로그인</button>
 			</div>
 		</div>
 		</form>
 
-		<a href="/member/pw">I forgot my password</a><br>
-		<a href="/member/join" class="text-center">Register a new membership</a>
+		<a href="/member/pw">아이디/비밀번호 찾기</a><br>
+		<a href="/member/join" class="text-center">회원가입</a>
 	</div>
 </div>
 </body>

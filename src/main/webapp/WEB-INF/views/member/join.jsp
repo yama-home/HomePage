@@ -57,7 +57,7 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		if(isBlank($("input[name='userid']").val())) {
-			alert("이름을 입력해주세요.");
+			alert("아이디를 입력해주세요.");
 			$("input[name='userid']").focus();
 			return;
 		}
@@ -98,45 +98,41 @@ $(document).ready(function() {
 });
 </script>
 </head>
-<body>
+<body class="register-page">
 <!-- Main content -->
-<section class="content">
-	<div class="row">
-		<!-- left column -->
-		<div class="form-join">
-			<!-- general form elements -->
-			<form role="form" method="post">
-			<div class="box">
-				<div class="box-header width-border">
-					<h2 class="form-join-heading">회원가입</h2>
-				</div>
+<div class="register-box" style="width:100%;">
+	<div class="register-logo">
+		<a href="/"><b>홈페이지</b> 회원가입</a>
+	</div>
 
-				<div class="box-body">
-					<div class="form-group">
-						<input type="text" name="userid" placeholder="아이디" class="form-control"/>
-					</div>
-					<div class="form-group">
-						<input type="password" name="userpw" placeholder="비밀번호" class="form-control"/>
-					</div>
-					<div class="form-group">
-						<input type="password" name="userpw_re" placeholder="비밀번호 확인" class="form-control"/>
-					</div>
-					<div class="form-group">
-						<input type="text" name="username" placeholder="이름" class="form-control"/>
-					</div>
-					<div class="form-group">
-						<input type="text" name="email" placeholder="이메일 주소" class="form-control"/>
-					</div>
-				</div>
+	<form role="form" method="post">
+	<div class="register-box-body">
+		<p class="register-box-msg">회원정보를 입력해주세요.</p>
 
-				<div class="box-footer">
-					<button type="submit" class="btn btn-primary">회원가입</button>
-					<button type="submit" class="btn btn-warning">취소</button>
-				</div>
+		<div class="form-group has-feedback">
+			<input type="text" name="userid" placeholder="아이디" class="form-control"/>
+		</div>
+		<div class="form-group has-feedback">
+			<input type="password" name="userpw" placeholder="비밀번호" class="form-control"/>
+		</div>
+		<div class="form-group has-feedback">
+			<input type="password" name="userpw_re" placeholder="비밀번호 확인" class="form-control"/>
+		</div>
+		<div class="form-group has-feedback">
+			<input type="text" name="username" placeholder="이름" class="form-control"/>
+		</div>
+		<div class="form-group has-feedback">
+			<input type="text" name="email" placeholder="이메일 주소" class="form-control"/>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-2">
+				<button type="submit" class="btn btn-primary">회원가입</button>
+				<button type="submit" class="btn btn-warning">취소</button>
 			</div>
-			</form>
 		</div>
 	</div>
-</section>
+	</form>
+</div>
 </body>
 </html>

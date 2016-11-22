@@ -1,19 +1,26 @@
 package net.hyunny333.controller;
 
+import java.util.UUID;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.hyunny333.domain.MemberVO;
 import net.hyunny333.dto.LoginDTO;
+import net.hyunny333.service.ApplicationMailer;
 import net.hyunny333.service.MemberService;
 
 @Controller
@@ -52,6 +59,22 @@ public class MemberController {
 
 	@RequestMapping(value="/joinPost", method=RequestMethod.POST)
 	public void joinPOST(MemberVO vo, RedirectAttributes rttr) throws Exception {
-		
+		UUID mailCode = UUID.randomUUID();
+
+        ApplicationContext context = new FileSystemXmlApplicationContext("application-context.xml");
+        ApplicationMailer mailer = (ApplicationMailer) context.getBean("mailService");
+        mailer.sendMail("hyunny333@naver.com", "Test Subject", "Testing body"+ mailCode);
+        mailer.sendPreConfiguredMail("Exception occurred everywhere.. where are you ????");
+	}
+
+	@RequestMapping(value="/checkID", method=RequestMethod.POST)
+	@ResponseBody
+	public String checkID(@RequestParam("userid") String userid) throws Exception {
+		int checkCount = service.checkID(userid);
+
+		if(checkCount > 0)
+			return "fail";
+		else
+			return "success";
 	}
 }

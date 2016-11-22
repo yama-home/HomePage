@@ -6,4 +6,8 @@
 	<select id="login" parameterType="LoginDTO" resultType="MemberVO">
 		SELECT * FROM `member` WHERE `userid`=#{userid} AND `userpw`=PASSWORD(#{userpw})
 	</select>
+
+	<select id="checkID" parameterType="String" resultType="Integer">
+		SELECT IF(COUNT(*)>0, COUNT(*), 0) AS `cnt` FROM `member` WHERE `userid`=#{userid}
+	</select>
 </mapper>

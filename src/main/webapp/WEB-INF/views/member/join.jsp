@@ -62,6 +62,20 @@ $(document).ready(function() {
 			return;
 		}
 
+		if(!checkUserid($("input[name='userid']").val())) {
+			alert("아이디를 4~12자리 영문, 숫자로 입력해주세요.");
+			$("input[name='userid']").focus();
+			return;
+		}
+
+		if($("input[name='checkID']").val() != "ok") {
+			alert("아이디 중복체크가 되지 않았습니다.");
+			$("#checkID_result").html("아이디를 <font color='RED'>4~12자리 영문, 숫자(<b>첫자는 영문</b>)</font>로 입력해주세요.");
+			$("input[name='checkID']").val("no");
+			$("input[name='userid']").val("").focus();
+			return;
+		}
+
 		if(isBlank($("input[name='userpw']").val())) {
 			alert("비밀번호를 입력해주세요.");
 			$("input[name='userpw']").focus();
@@ -95,6 +109,26 @@ $(document).ready(function() {
 
 		$(this).submit();
 	});
+
+	$("input[name='userid']").on("keyup", function() {
+		if(checkUserid($(this).val())) {
+			$.post("/member/checkID", {
+				userid: $(this).val()
+			},
+			function(data) {
+				if(data == "success") {
+					$("#checkID_result").html("<font color='BLUE'>사용 가능한 아이디입니다.</font>");
+					$("input[name='checkID']").val("ok");
+				} else {
+					$("#checkID_result").html("<font color='RED'>이미 사용중인 아이디입니다.</font>");
+					$("input[name='checkID']").val("no");
+				}
+			});
+		} else {
+			$("#checkID_result").html("아이디를 <font color='RED'>4~12자리 영문, 숫자(<b>첫자는 영문</b>)</font>로 입력해주세요.");
+			$("input[name='checkID']").val("no");
+		}
+	});
 });
 </script>
 </head>
@@ -105,12 +139,14 @@ $(document).ready(function() {
 		<a href="/"><b>홈페이지</b> 회원가입</a>
 	</div>
 
-	<form role="form" method="post">
+	<form role="form" action="/member/joinPost" method="post" autocomplete="off">
+	<input type="hidden" name="checkID" value="no"/>
 	<div class="register-box-body">
 		<p class="register-box-msg">회원정보를 입력해주세요.</p>
 
 		<div class="form-group has-feedback">
-			<input type="text" name="userid" placeholder="아이디" class="form-control"/>
+			<input type="text" name="userid" maxlength="12" placeholder="아이디" class="form-control"/>
+			<span id="checkID_result">아이디를 <font color="RED">4~12자리 영문, 숫자(<b>첫자는 영문</b>)</font>로 입력해주세요.</span>
 		</div>
 		<div class="form-group has-feedback">
 			<input type="password" name="userpw" placeholder="비밀번호" class="form-control"/>
@@ -123,13 +159,12 @@ $(document).ready(function() {
 		</div>
 		<div class="form-group has-feedback">
 			<input type="text" name="email" placeholder="이메일 주소" class="form-control"/>
+			<span>가입 후 메일로 발송된 링크를 클릭하시면 계정이 활성화됩니다.</span>
 		</div>
 
-		<div class="row">
-			<div class="col-xs-2">
-				<button type="submit" class="btn btn-primary">회원가입</button>
-				<button type="submit" class="btn btn-warning">취소</button>
-			</div>
+		<div class="row text-center">
+			<button type="submit" class="btn btn-primary">회원가입</button>
+			<button type="submit" class="btn btn-warning">취소</button>
 		</div>
 	</div>
 	</form>

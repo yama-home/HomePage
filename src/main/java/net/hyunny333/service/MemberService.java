@@ -5,4 +5,5 @@ import net.hyunny333.dto.LoginDTO;
 
 public interface MemberService {
 	public MemberVO login(LoginDTO dto) throws Exception;
+	public int checkID(String userid) throws Exception;
 }

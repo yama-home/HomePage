@@ -56,12 +56,6 @@ $(document).ready(function() {
 	$("form[role='form']").submit(function() {
 		event.preventDefault();
 
-		if(isBlank($("input[name='userid']").val())) {
-			alert("아이디를 입력해주세요.");
-			$("input[name='userid']").focus();
-			return;
-		}
-
 		if(!checkUserid($("input[name='userid']").val())) {
 			alert("아이디를 4~12자리 영문, 숫자로 입력해주세요.");
 			$("input[name='userid']").focus();
@@ -70,21 +64,9 @@ $(document).ready(function() {
 
 		if($("input[name='checkID']").val() != "ok") {
 			alert("아이디 중복체크가 되지 않았습니다.");
-			$("#checkID_result").html("아이디를 <font color='RED'>4~12자리 영문, 숫자(<b>첫자는 영문</b>)</font>로 입력해주세요.");
+			$("#checkID_result").html("<font color='RED'>4~12자리 영문, 숫자(<b>첫자는 영문</b>)</font>로 입력");
 			$("input[name='checkID']").val("no");
 			$("input[name='userid']").val("").focus();
-			return;
-		}
-
-		if(isBlank($("input[name='userpw']").val())) {
-			alert("비밀번호를 입력해주세요.");
-			$("input[name='userpw']").focus();
-			return;
-		}
-
-		if(isBlank($("input[name='userpw_re']").val())) {
-			alert("비밀번호를 한번 더 입력해주세요.");
-			$("input[name='userpw_re']").focus();
 			return;
 		}
 
@@ -92,18 +74,6 @@ $(document).ready(function() {
 			alert("비밀번호가 일치하지 않습니다.");
 			$("input[name='userpw_re']").val("");
 			$("input[name='userpw_re']").focus();
-			return;
-		}
-
-		if(isBlank($("input[name='username']").val())) {
-			alert("이름을 입력해주세요.");
-			$("input[name='username']").focus();
-			return;
-		}
-
-		if(isBlank($("input[name='email']").val())) {
-			alert("이메일 주소를 입력해주세요.");
-			$("input[name='email']").focus();
 			return;
 		}
 
@@ -125,7 +95,7 @@ $(document).ready(function() {
 				}
 			});
 		} else {
-			$("#checkID_result").html("아이디를 <font color='RED'>4~12자리 영문, 숫자(<b>첫자는 영문</b>)</font>로 입력해주세요.");
+			$("#checkID_result").html("<font color='RED'>4~12자리 영문, 숫자(<b>첫자는 영문</b>)</font>로 입력");
 			$("input[name='checkID']").val("no");
 		}
 	});
@@ -134,7 +104,7 @@ $(document).ready(function() {
 </head>
 <body class="register-page">
 <!-- Main content -->
-<div class="register-box" style="width:100%;">
+<div class="register-box" style="width:100%; max-width:800px;">
 	<div class="register-logo">
 		<a href="/"><b>홈페이지</b> 회원가입</a>
 	</div>
@@ -145,22 +115,26 @@ $(document).ready(function() {
 		<p class="register-box-msg">회원정보를 입력해주세요.</p>
 
 		<div class="form-group has-feedback">
-			<input type="text" name="userid" maxlength="12" placeholder="아이디" class="form-control"/>
-			<span id="checkID_result">아이디를 <font color="RED">4~12자리 영문, 숫자(<b>첫자는 영문</b>)</font>로 입력해주세요.</span>
+			<input type="text" name="userid" maxlength="12" placeholder="아이디" class="form-control" required/>
+			<span id="checkID_result"><font color="RED">4~12자리 영문, 숫자(<b>첫자는 영문</b>)</font>로 입력</span>
 		</div>
 		<div class="form-group has-feedback">
-			<input type="password" name="userpw" placeholder="비밀번호" class="form-control"/>
+			<input type="password" name="userpw" placeholder="비밀번호" class="form-control" required/>
 		</div>
 		<div class="form-group has-feedback">
-			<input type="password" name="userpw_re" placeholder="비밀번호 확인" class="form-control"/>
+			<input type="password" name="userpw_re" placeholder="비밀번호 확인" class="form-control" required/>
 		</div>
 		<div class="form-group has-feedback">
-			<input type="text" name="username" placeholder="이름" class="form-control"/>
+			<input type="text" name="username" placeholder="이름" class="form-control" required/>
 		</div>
 		<div class="form-group has-feedback">
-			<input type="text" name="email" placeholder="이메일 주소" class="form-control"/>
-			<span>가입 후 메일로 발송된 링크를 클릭하시면 계정이 활성화됩니다.</span>
+			<input type="text" name="email" placeholder="이메일 주소" class="form-control" required/>
 		</div>
+
+		<p style="font-size:12px;">
+			ㆍ 가입 후 메일로 발송된 링크를 클릭하시면 계정이 활성화됩니다.<br/>
+			ㆍ 이름과 이메일 주소는 아이디/비밀번호 찾기에 사용됩니다. 정확히 입력해 주시기 바랍니다.
+		</p>
 
 		<div class="row text-center">
 			<button type="submit" class="btn btn-primary">회원가입</button>

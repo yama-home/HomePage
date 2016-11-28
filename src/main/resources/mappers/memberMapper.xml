@@ -10,4 +10,9 @@
 	<select id="checkID" parameterType="String" resultType="Integer">
 		SELECT IF(COUNT(*)>0, COUNT(*), 0) AS `cnt` FROM `member` WHERE `userid`=#{userid}
 	</select>
+
+	<insert id="join" parameterType="MemberVO">
+		INSERT INTO `member` (`userid`, `userpw`, `username`, `email`, `regdate`) 
+		VALUES (#{userid}, PASSWORD(#{userpw}), #{username}, #{email}, NOW())
+	</insert>
 </mapper>

@@ -53,7 +53,7 @@ $(document).ready(function() {
 		history.back();
 	});
 
-	$("form[role='form']").submit(function() {
+	$(".btn-primary").on("click", function() {
 		event.preventDefault();
 
 		if(!checkUserid($("input[name='userid']").val())) {
@@ -77,7 +77,7 @@ $(document).ready(function() {
 			return;
 		}
 
-		$(this).submit();
+		$("form[role='form']").submit();
 	});
 
 	$("input[name='userid']").on("keyup", function() {

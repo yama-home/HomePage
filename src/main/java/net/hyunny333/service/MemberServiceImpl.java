@@ -22,4 +22,9 @@ public class MemberServiceImpl implements MemberService {
 	public int checkID(String userid) throws Exception {
 		return dao.checkID(userid);
 	}
+
+	@Override
+	public void join(MemberVO vo) throws Exception {
+		dao.join(vo);
+	}
 }

@@ -1,14 +1,10 @@
 package net.hyunny333.controller;
 
-import java.util.UUID;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.hyunny333.domain.MemberVO;
 import net.hyunny333.dto.LoginDTO;
-import net.hyunny333.service.ApplicationMailer;
 import net.hyunny333.service.MemberService;
 
 @Controller
@@ -58,13 +53,12 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/joinPost", method=RequestMethod.POST)
-	public void joinPOST(MemberVO vo, RedirectAttributes rttr) throws Exception {
-		UUID mailCode = UUID.randomUUID();
+	public String joinPOST(MemberVO vo, RedirectAttributes rttr) throws Exception {
+		service.join(vo);
 
-        ApplicationContext context = new FileSystemXmlApplicationContext("application-context.xml");
-        ApplicationMailer mailer = (ApplicationMailer) context.getBean("mailService");
-        mailer.sendMail("hyunny333@naver.com", "Test Subject", "Testing body"+ mailCode);
-        mailer.sendPreConfiguredMail("Exception occurred everywhere.. where are you ????");
+		rttr.addFlashAttribute("msg", "정상적으로 회원가입 되셨습니다.\\n메일로 발송된 링크를 클릭하시면 계정이 활성화됩니다.");
+
+		return "redirect:/member/login";
 	}
 
 	@RequestMapping(value="/checkID", method=RequestMethod.POST)

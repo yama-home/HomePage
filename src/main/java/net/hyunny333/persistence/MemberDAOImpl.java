@@ -23,4 +23,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public int checkID(String userid) throws Exception {
 		return sqlSession.selectOne(namespace +".checkID", userid);
 	}
+
+	@Override
+	public void join(MemberVO vo) throws Exception {
+		sqlSession.insert(namespace +".join", vo);
+	}
 }

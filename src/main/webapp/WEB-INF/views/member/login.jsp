@@ -27,6 +27,11 @@
 <!-- iCheck -->
 <script src="/resources/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+var msg = "${msg}";
+
+if(msg != "")
+	alert(msg);
+
 $(document).ready(function () {
 	$("input").iCheck({
 		checkboxClass: "icheckbox_square-blue",

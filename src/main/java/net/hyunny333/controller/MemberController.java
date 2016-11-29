@@ -1,10 +1,15 @@
 package net.hyunny333.controller;
 
+import java.util.UUID;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +29,9 @@ public class MemberController {
 	@Inject
 	private MemberService service;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+
+	@Autowired
+	protected JavaMailSender mailSender;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public void loginGET(@ModelAttribute("dto") LoginDTO dto) throws Exception {
@@ -54,8 +62,17 @@ public class MemberController {
 
 	@RequestMapping(value="/joinPost", method=RequestMethod.POST)
 	public String joinPOST(MemberVO vo, RedirectAttributes rttr) throws Exception {
+		UUID randomCode = UUID.randomUUID();
+		String emailCertifiedCode = randomCode +"_"+ vo.getUserid();
+		vo.setEmailCertifiedCode(emailCertifiedCode);
 		service.join(vo);
 
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setFrom("hyunny333@gmail.com");
+		msg.setTo(vo.getEmail());
+		msg.setSubject("[홈페이지] 회원가입을 축하드립니다.");
+		msg.setText("회원가입을 축하드립니다.\\n아래 URL을 클릭하시면 계정이 활성화됩니다.\\nURL : "+ emailCertifiedCode);
+		mailSender.send(msg);
 		rttr.addFlashAttribute("msg", "정상적으로 회원가입 되셨습니다.\\n메일로 발송된 링크를 클릭하시면 계정이 활성화됩니다.");
 
 		return "redirect:/member/login";

@@ -12,9 +12,11 @@ CREATE TABLE `member` (
     `username` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '이름',
     `email` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '메일주소',
     `regdate` TIMESTAMP NOT NULL DEFAULT NOW() COMMENT '가입일시',
+    `email_certified_code` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '메일인증 코드',
     PRIMARY KEY(`idx`)
 );
 INSERT INTO `member` SET `userid`='hyunny333', `userpw`=PASSWORD('tkdgus2'), `username`='엄상현', `email`='hyunny333@gmail.com';
+ALTER TABLE `member` ADD COLUMN `email_certified_code` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '메일인증 코드';
 SELECT * FROM `member`;
 
 

@@ -9,6 +9,7 @@ public class MemberVO {
 	private String username;
 	private String email;
 	private Date regdate;
+	private String emailCertifiedCode;
 
 	//Getter
 	public int getIdx() {
@@ -29,6 +30,9 @@ public class MemberVO {
 	public Date getRegdate() {
 		return regdate;
 	}
+	public String getEmailCertifiedCode() {
+		return emailCertifiedCode;
+	}
 
 	//Setter
 	public void setIdx(int idx) {
@@ -48,5 +52,8 @@ public class MemberVO {
 	}
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
+	}
+	public void setEmailCertifiedCode(String emailCertifiedCode) {
+		this.emailCertifiedCode = emailCertifiedCode;
 	}
 }

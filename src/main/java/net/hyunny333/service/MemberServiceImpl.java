@@ -27,4 +27,14 @@ public class MemberServiceImpl implements MemberService {
 	public void join(MemberVO vo) throws Exception {
 		dao.join(vo);
 	}
+
+	@Override
+	public int certifyEmailCheck(String emailCertifiedCode) throws Exception {
+		return dao.certifyEmailCheck(emailCertifiedCode);
+	}
+
+	@Override
+	public void certifyEmail(String emailCertifiedCode) throws Exception {
+		dao.certifyEmail(emailCertifiedCode);
+	}
 }

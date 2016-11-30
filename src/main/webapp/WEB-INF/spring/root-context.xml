@@ -49,6 +49,22 @@
 	<tx:annotation-driven/>
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-	<property name="maxUploadSize" value="10485760"></property>
+		<property name="maxUploadSize" value="10485760"></property>
+	</bean>
+
+	<!-- mail -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="username" value="hyunny333" />
+		<property name="password" value="xpcepqzltccceogm" />
+
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+			</props>
+		</property>
 	</bean>
 </beans>

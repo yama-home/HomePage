@@ -28,4 +28,14 @@ public class MemberDAOImpl implements MemberDAO {
 	public void join(MemberVO vo) throws Exception {
 		sqlSession.insert(namespace +".join", vo);
 	}
+
+	@Override
+	public int certifyEmailCheck(String emailCertifiedCode) throws Exception {
+		return sqlSession.selectOne(namespace +".certifyEmailCheck", emailCertifiedCode);
+	}
+
+	@Override
+	public void certifyEmail(String emailCertifiedCode) throws Exception {
+		sqlSession.update(namespace +".certifyEmail", emailCertifiedCode);
+	}
 }

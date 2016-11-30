@@ -7,4 +7,6 @@ public interface MemberDAO {
 	public MemberVO login(LoginDTO dto) throws Exception;
 	public int checkID(String userid) throws Exception;
 	public void join(MemberVO vo) throws Exception;
+	public int certifyEmailCheck(String emailCertifiedCode) throws Exception;
+	public void certifyEmail(String emailCertifiedCode) throws Exception;
 }

@@ -68,6 +68,16 @@ $(document).ready(function() {
 		}
 	});
 
+	$(".btn-xs").on("click", function() {
+		var x = $(document.createElement("input"));
+		x.attr("type", "file");
+		x.attr("accept", "image/*");
+		x.trigger("click");
+		x.on("change", function() {
+			alert(this.value);
+		});
+	});
+
 	formObj.submit(function(event) {
 		event.preventDefault();
 
@@ -118,7 +128,7 @@ $(document).ready(function() {
 						<textarea name="content" id="content" rows="3" class="form-control" placeholder="내용을 입력해주세요."></textarea>
 					</div>
 					<div class="form-group">
-						<label>File DROP Here</label>
+						<label>File DROP Here <button type="button" class="btn btn-xs">파일첨부</button></label>
 						<div class="fileDrop"></div>
 					</div>
 				</div>

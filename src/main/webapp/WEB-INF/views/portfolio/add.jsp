@@ -76,6 +76,8 @@ $(document).ready(function() {
 		x.on("change", function() {
 			alert(this.value);
 		});
+
+		return false;
 	});
 
 	formObj.submit(function(event) {

@@ -47,34 +47,57 @@ $(document).ready(function() {
 			event.preventDefault();
 
 			var files = event.originalEvent.dataTransfer.files;
-			var file = files[0];
-			var formData = new FormData();
-			formData.append("file", file);
+			for(var i=0; i<files.length; i++) {
+				var file = files[i];
+				var formData = new FormData();
+				formData.append("file", file);
 
-			$.ajax({
-				type: "post",
-				url: "/uploadAjax",
-				data: formData,
-				dataType: "text",
-				processData: false,
-				contentType: false,
-				success: function(data) {
-					var fileInfo = getFileInfo(data);
-					var html = template(fileInfo);
+				$.ajax({
+					type: "post",
+					url: "/uploadAjax",
+					data: formData,
+					dataType: "text",
+					processData: false,
+					contentType: false,
+					success: function(data) {
+						var fileInfo = getFileInfo(data);
+						var html = template(fileInfo);
 
-					$(".uploadedList").append(html);
-				}
-			});
+						$(".uploadedList").append(html);
+					}
+				});
+			}
 		}
 	});
 
 	$(".btn-xs").on("click", function() {
 		var x = $(document.createElement("input"));
 		x.attr("type", "file");
+		x.attr("multiple", "multiple");
 		x.attr("accept", "image/*");
 		x.trigger("click");
-		x.on("change", function() {
-			alert(this.value);
+		x.on("change", function(event) {
+			var files = event.target.files;
+			for(var i=0; i<files.length; i++) {
+				var file = files[i];
+				var formData = new FormData();
+				formData.append("file", file);
+
+				$.ajax({
+					type: "post",
+					url: "/uploadAjax",
+					data: formData,
+					dataType: "text",
+					processData: false,
+					contentType: false,
+					success: function(data) {
+						var fileInfo = getFileInfo(data);
+						var html = template(fileInfo);
+
+						$(".uploadedList").append(html);
+					}
+				});
+			}
 		});
 
 		return false;
@@ -133,6 +156,7 @@ $(document).ready(function() {
 						<label>File DROP Here <button type="button" class="btn btn-xs">파일첨부</button></label>
 						<div class="fileDrop"></div>
 					</div>
+					<div id="fine-uploader-gallery"></div>
 				</div>
 
 				<div class="box-footer">

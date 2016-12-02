@@ -4,4 +4,5 @@ import net.hyunny333.domain.PortfolioVO;
 
 public interface PortfolioDAO {
 	public void add(PortfolioVO vo) throws Exception;
+	public void addAttach(String fullName) throws Exception;
 }

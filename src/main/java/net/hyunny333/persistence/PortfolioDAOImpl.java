@@ -17,4 +17,9 @@ public class PortfolioDAOImpl implements PortfolioDAO {
 	public void add(PortfolioVO vo) throws Exception {
 		sqlSession.insert(namespace +".add", vo);
 	}
+
+	@Override
+	public void addAttach(String fullName) throws Exception {
+		sqlSession.insert(namespace +".addAttach", fullName);
+	}
 }

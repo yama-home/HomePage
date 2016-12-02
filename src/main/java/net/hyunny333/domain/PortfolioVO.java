@@ -7,6 +7,7 @@ public class PortfolioVO {
 	private String title;
 	private String content;
 	private Date regdate;
+	private String[] files;
 
 	//Getter
 	public int getIdx() {
@@ -21,6 +22,9 @@ public class PortfolioVO {
 	public Date getRegdate() {
 		return regdate;
 	}
+	public String[] getFiles() {
+		return files;
+	}
 
 	//Setter
 	public void setIdx(int idx) {
@@ -34,5 +38,8 @@ public class PortfolioVO {
 	}
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
 	}
 }

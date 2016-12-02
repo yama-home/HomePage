@@ -42,8 +42,8 @@ CREATE TABLE `portfolio_files` (
 	`idx` INT NOT NULL AUTO_INCREMENT,
     `portfolio_idx` INT NOT NULL DEFAULT 0 COMMENT '원글 idx',
     `file_name` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '파일명',
-    `file_size` INT NOT NULL DEFAULT 0 COMMENT '파일용량',
     PRIMARY KEY(`idx`)
 );
 ALTER TABLE `portfolio_files` ADD CONSTRAINT `fk_portfolio` FOREIGN KEY (`portfolio_idx`) REFERENCES `portfolio` (`idx`);
+ALTER TABLE `portfolio_files` DROP COLUMN `file_size`;
 SELECT * FROM `portfolio_files`;

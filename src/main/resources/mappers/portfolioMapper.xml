@@ -16,11 +16,23 @@
 	</select>
 
 	<insert id="add" parameterType="PortfolioVO">
-		INSERT INTO 
-			`portfolio` 
-		SET 
-			`title`=#{title}, 
-			`content`=#{content}, 
-			`regdate`=NOW()
+		<![CDATA[
+			INSERT INTO 
+				`portfolio` 
+			SET 
+				`title`=#{title}, 
+				`content`=#{content}, 
+				`regdate`=NOW()
+		]]>
+	</insert>
+
+	<insert id="addAttach">
+		<![CDATA[
+			INSERT INTO 
+				`portfolio_files`
+			SET  
+				`portfolio_idx`=(SELECT MAX(`idx`) FROM `portfolio`), 
+				`file_name`=#{fullName}
+		]]>
 	</insert>
 </mapper>
